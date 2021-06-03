@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      setTimeout(console.log, 1, 'hello'); //hello
+    </script>
+    <script>
+      //promise 对象
+      // 一：resolve
+      //1. 只有通过resolve一个值出去，才能进入到.then
+      //2. 在.then中才能拿到res
+      //3. res的值就是resolve的值
+      //4. 执行顺序：先执行resolve再执行.then
+      //二：rejected
+      //1. 只有通过rejected一个值出去，才能进入到.catch
+      //2. 在.catch中才能拿到err
+      //3. err的值就是rejected的值
+      //4. 执行顺序：先执行rejected再执行.catch
+      // 注意：当resolve和rejected同时存在时，哪个在前面就会执行哪个，执行完之后会直接进入.then或者.catch
+      //三：finally
+      //1. 不管 Promise 对象最后状态如何，都会执行的操作
+      //2. 不接受任何参数
+      // new Promise((resolve, rejected) => {
+      //   setTimeout(() => {
+      //     console.log("我是延迟2s执行的方法");
+      //     resolve('我是resolve出去的值')
+      //   }, 2000);
+      // }).then((res)=>{
+      //   setTimeout(()=>{
+      //     console.log(res);//我是resolve出去的值
+      //   },1000)
+      // });
+
+      // --------------------------------------------------------------
+      // 方法一
+      // new Promise((resolve, rejected)=>{
+      //   setTimeout(()=>{
+      //     console.log("我是延迟2s执行的方法");
+      //     rejected('我是reject出去的值');
+      //   },2000)
+      // }).catch(err=>{
+      //   setTimeout(()=>{
+      //     console.log(err);
+      //   },1000)
+      // })
+      // 方法二
+      // new Promise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     console.log("我是延迟2s执行的方法");
+      //     reject("我是reject出去的值");
+      //   }, 2000);
+      // }).then((err) => {
+      //   setTimeout(() => {
+      //     console.log(err);
+      //   }, 1000);
+      // });
+
+      // ------------------------------------------------
+
+      // let p1 = new Promise((resolve, rejected) => {
+      //   resolve("我成功了！");
+      //   // rejected('我失败了')
+      // })
+      //   .then((res) => res)
+      //   .catch((err) => err);
+      // let p2 = new Promise(() => {
+      //   throw new Error("我错了!");
+      // })
+      //   .then((res) => res)
+      //   .catch((err) => err);
+      // let p = Promise.all([p1, p2])
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // console.log(p);
+
+      // const p = Promise.all([p1, p2, p3])
+      //Promise.all(): 方法用于将多个 Promise 实例，包装成一个新的 Promise 实例
+        //1. p的类型是一个promise对象
+        //2. p的状态由p1,p2,p3共同决定（p1,p2,p3有一个状态是rejected，那么p的状态就是rejected。否则就为fulfilled）
+        //3. p的回调的形参，由p1,p2,p3返回的值组成的一个数组
+
+      // const p = Promise.race([p1, p2, p3]);
+      //Promise.race(): 方法用于将多个 Promise 实例，包装成一个新的 Promise 实例
+        //
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./mPromise.js"></script>
+  <script src="./otherPromise.js"></script>
+  <script>
+
+    //初步实现promise 实现resolve，rejected，then
+    // new mPromise((resolve, rejected) => {
+    //   setTimeout(() => {
+    //     console.log('间隔 1s log');
+    //   }, 1000)
+    //   // resolve('成功')
+    //   rejected('失败')
+    // }).then(res => {
+    //   console.log(res);
+    // },err=>{
+    //   console.log(err);
+    // })
+
+    //mPromise（未处理then调用链）
+    // let m1 = new mPromise((resolve, rejected)=>{
+    //   resolve('hello')
+    // }).then(res=>{
+    //   return res + ' world'
+    // });
+    // let m2 = m1.then(res=>{
+    //   console.log(res);//Uncaught TypeError: Cannot read property 'then' of undefined
+    // })
+
+    //promise
+    // let p1 = new Promise((resolve,reject)=>{
+    //   resolve('hello');
+    // }).then((res)=>{
+    //   return res + ' world'
+    // })
+    // let p2 = p1.then(res=>{
+    //   console.log(res);//hello world
+    // })
+
+
+    // 当onFulfilled执行的结果是一个Promise时，后续的then会等待其执行完成之后才执行
+    // let mPro1 = new Promise((resolve, rejected) => {
+    //   resolve(new Promise((res, rej) => {
+    //     setTimeout(() => {
+    //       res('我是延迟执行的resolve')
+    //     }, 2000)
+    //   }))
+    // }).then(result => {
+    //   console.log('我是第一个then');
+    //   return result
+    // })
+    // let mPro2 = mPro1.then(res => {
+    //   console.log('我是第二个then');
+    //   console.log(res);
+    // })
+
+    // let pro1 = new Promise((resolve, rejected) => {
+    //   resolve(new mPromise((res, rej) => {
+    //     setTimeout(() => {
+    //       res('我是延迟执行的resolve')
+    //     }, 2000)
+    //   }))
+    // }).then(result => {
+    //   console.log('我是第一个then');
+    //   return result
+    // })
+    // let pro2 = pro1.then(res => {
+    //   console.log('我是第二个then');
+    //   console.log(res);
+    // })
+
+    //增加catch
+      let p1 = new mPromise((resolve,rejected)=>{
+        setTimeout(()=>{
+          rejected('我失败了')
+        },1000)
+      });
+      let p2 = p1.catch(err=>{
+        console.log(err);
+      })
+      let p3 = p1.finally(fina=>{
+        console.log(fina);
+      })
+  </script>
+</body>
+
+</html>
