@@ -10,6 +10,7 @@
 
 <body>
   <script src="./mPromise.js"></script>
+  <script src="./promise.js"></script>
   <script>
 
     //初步实现promise 实现resolve，rejected，then
@@ -78,7 +79,7 @@
     // })
 
     //增加catch
-      let p1 = new mPromise((resolve,rejected)=>{
+      let p1 = new Promise((resolve,rejected)=>{
         setTimeout(()=>{
           rejected('我失败了')
         },1000)
